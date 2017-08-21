@@ -1,7 +1,9 @@
 package ifpb.ads.dac.main;
 
 import ifpb.ads.dac.domain.Departamento;
+import ifpb.ads.dac.domain.Dependente;
 import ifpb.ads.dac.domain.Funcionario;
+import ifpb.ads.dac.domain.Projeto;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,17 +16,31 @@ import javax.persistence.Persistence;
 public class App {
 
     public static void main(String[] args) {
-
-        Departamento departamento = Departamento.empty();
-        Funcionario funcionario = Funcionario.of("Kiko", departamento);
-
         App app = new App();
-        app.persistFuncionario(departamento);
-        app.persistFuncionario(funcionario);
+
+//        Departamento departamento = app.primeiroDepartamento();
+        Departamento departamento = Departamento.empty();
+        Funcionario funcionario = Funcionario.of("Chaves", departamento);
+
+        funcionario.novoDependente(new Dependente("Kiko"));
+        funcionario.novoDependente(new Dependente("Chiquinha"));
+        
+        Projeto dac = new Projeto("20171", "Vai ser mara");
+        Projeto pos = new Projeto("20172", "Vai ser mara, de novo");
+        funcionario.novoProjeto(dac);
+        funcionario.novoProjeto(pos);
+        
+        app.persist(dac);
+        app.persist(pos);
+        app.persist(departamento);
+        app.persist(funcionario);
 
     }
 
-    public void persistFuncionario(Object object) {
+//    public Departamento primeiroDepartamento() {
+//        return em.find(Departamento.class, 1);
+//    }
+    public void persist(Object object) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("RelacionamentoPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

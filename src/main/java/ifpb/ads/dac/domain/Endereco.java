@@ -2,16 +2,18 @@ package ifpb.ads.dac.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * @author Ricardo Job
  * @mail ricardo.job@ifpb.edu.br
  * @since 21/08/2017, 07:23:12
  */
-@Embeddable
+@Entity
 public class Endereco implements Serializable {
 
+    @Id
     private String rua;
     private String bairro;
     private String cidade;

@@ -18,6 +18,8 @@ public class Departamento implements Serializable {
     private int id;
     private String sigla;
 
+    
+    
     public Departamento() {
     }
 

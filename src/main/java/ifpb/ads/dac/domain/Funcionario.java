@@ -1,13 +1,18 @@
 package ifpb.ads.dac.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -23,17 +28,29 @@ public class Funcionario implements Serializable {
     private int id;
     @Column(length = 80)
     private String nome;
-    @Embedded
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(unique = true)
     private Endereco endereco;
 
-    @OneToOne//(cascade = CascadeType.PERSIST)
+    @ManyToOne//(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "dep_id")
     private Departamento departamento;
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "funcionario_id")
+    private List<Dependente> dependentes;
+
+    @ManyToMany
+    private List<Projeto> projetos;
+
     public Funcionario() {
+        this.projetos = new ArrayList<>();
+        this.dependentes = new ArrayList<>();
     }
 
     private Funcionario(String nome, Endereco endereco,
             Departamento departamento) {
+        this();
         this.nome = nome;
         this.endereco = endereco;
         this.departamento = departamento;
@@ -48,7 +65,28 @@ public class Funcionario implements Serializable {
                 nome, Endereco.empty(), departamento);
     }
 
-//    public void setDepartamento(Departamento departamento) {
-//        this.departamento = departamento;
-//    }
+    public void novoDependente(Dependente dependente) {
+        this.dependentes.add(dependente);
+    }
+
+    public void removerDependente(Dependente dependente) {
+        this.dependentes.remove(dependente);
+    }
+
+    public List<Dependente> getDependentes() {
+        return Collections.unmodifiableList(dependentes);
+    }
+
+    public void novoProjeto(Projeto projeto) {
+        this.projetos.add(projeto);
+    }
+
+    public void removerProjeto(Projeto projeto) {
+        this.projetos.remove(projeto);
+    }
+
+    public List<Projeto> getProjetos() {
+        return Collections.unmodifiableList(projetos);
+    }
+
 }

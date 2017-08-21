@@ -4,6 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>ifpb.ads.dac.domain.Funcionario</class>
     <class>ifpb.ads.dac.domain.Departamento</class>
+    <class>ifpb.ads.dac.domain.Dependente</class>
+    <class>ifpb.ads.dac.domain.Endereco</class>
+    <class>ifpb.ads.dac.domain.Projeto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jpa-aula"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
