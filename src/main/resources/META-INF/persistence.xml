@@ -7,12 +7,34 @@
     <class>ifpb.ads.dac.domain.Dependente</class>
     <class>ifpb.ads.dac.domain.Endereco</class>
     <class>ifpb.ads.dac.domain.Projeto</class>
+    <class>ifpb.ads.dac.domain.Gerente</class>
+    <class>ifpb.ads.dac.domain.inheritance.single.CarroDeMao</class>
+    <class>ifpb.ads.dac.domain.inheritance.single.Fusca</class>
+    <class>ifpb.ads.dac.domain.inheritance.single.Carro</class>
+    <class>ifpb.ads.dac.domain.inheritance.table.Animal</class>
+    <class>ifpb.ads.dac.domain.inheritance.table.Cachorro</class>
+    <class>ifpb.ads.dac.domain.inheritance.table.Gato</class>
+    <class>ifpb.ads.dac.domain.inheritance.joined.Empregado</class>
+    <class>ifpb.ads.dac.domain.inheritance.joined.Professor</class>
+    <class>ifpb.ads.dac.domain.inheritance.joined.Tecnico</class>
+    <class>ifpb.ads.dac.domain.inheritance.mapped.Dentista</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jpa-aula"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="12345"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="DEFAULT_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>ifpb.ads.Pessoa</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
+      <property name="javax.persistence.jdbc.password" value="app"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.user" value="app"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

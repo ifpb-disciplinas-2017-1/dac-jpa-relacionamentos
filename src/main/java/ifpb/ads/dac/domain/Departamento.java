@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  * @author Ricardo Job
@@ -17,9 +19,10 @@ public class Departamento implements Serializable {
     @GeneratedValue
     private int id;
     private String sigla;
+    @OneToOne
+    @JoinColumn(name = "gerente_id")
+    private Gerente gerente; //1-1
 
-    
-    
     public Departamento() {
     }
 
@@ -33,6 +36,11 @@ public class Departamento implements Serializable {
 
     public String id() {
         return String.valueOf(id);
+    }
+
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
+        gerente.setDepartamento(this);
     }
 
 }
